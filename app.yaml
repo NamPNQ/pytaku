@@ -20,6 +20,9 @@ skip_files:
 - ^package\.json$
 - ^requirements\.txt$
 
+builtins:
+- deferred: on
+
 handlers:
 - url: /static
   static_dir: frontend-dist/static
@@ -28,6 +31,11 @@ handlers:
 - url: /favicon\.ico
   static_files: frontend-dist/favicon.ico
   upload: frontend-dist/favicon\.ico
+
+- url: /update_schema
+  script: migration.migration_handler.app  # path to webapp2 application definition.
+  login: admin
+  secure: always
 
 - url: /
   static_files: frontend-dist/app.html
